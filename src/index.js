@@ -26,7 +26,7 @@ function init () {
             return readProjectFile(fileDescriptor)
                 .then(projectContent => {
                     console.log(projectContent);
-                    return showMenu(projectContent)
+                    return showMenu(projectContent, executePath)
                         .then(() => {
                             return Promise.resolve()
                                 .then(() => closeProjectFile(fileDescriptor))

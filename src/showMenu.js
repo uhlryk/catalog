@@ -1,14 +1,14 @@
-const fs = require("fs");
 const inquirer = require("inquirer");
-
+const listRawFiles = require("./listRawFiles");
 /**
  *
  * @param {object} projectContent
  * @param {object} projectContent.files
  * @param {object} projectContent.tags
+ * @param {string} projectPath
  * @returns {PromiseLike<*>}
  */
-module.exports = function showMenu(projectContent) {
+module.exports = function showMenu(projectContent, projectPath) {
     return inquirer
         .prompt([
             {
@@ -24,9 +24,13 @@ module.exports = function showMenu(projectContent) {
         ])
         .then(answers => {
             if(answers["menuOptions"] === "SHOW RAW FILES") {
-                return new Promise((resolve, reject) => {
-                    resolve();
-                })
+                return listRawFiles(projectContent, projectPath)
+                    .then(fileList  => {
+                        fileList.forEach(file => {
+                            console.log(file)
+                        })
+                    })
+
             } else if(answers["menuOptions"] === "SHOW TAGGED FILES") {
                 return new Promise((resolve, reject) => {
                     resolve();
