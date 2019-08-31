@@ -3,9 +3,12 @@ const inquirer = require("inquirer");
 
 /**
  *
- * @returns {Promise<*>}
+ * @param {object} projectContent
+ * @param {object} projectContent.files
+ * @param {object} projectContent.tags
+ * @returns {PromiseLike<*>}
  */
-module.exports = function showMenu() {
+module.exports = function showMenu(projectContent) {
     return inquirer
         .prompt([
             {

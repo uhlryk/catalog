@@ -3,6 +3,7 @@ const path = require("path");
 const openProjectFile = require("./openProjectFile");
 const closeProjectFile = require("./closeProjectFile");
 const createProjectFile = require("./createProjectFile");
+const readProjectFile = require("./readProjectFile");
 const showMenu = require("./showMenu");
 
 const projectFileName = "project.json";
@@ -22,11 +23,16 @@ function init () {
         })
         .then(fileDescriptor => {
             console.log("Project exist");
-            return showMenu()
-                .then(() => {
-                    return Promise.resolve()
-                        .then(() => closeProjectFile(fileDescriptor))
+            return readProjectFile(fileDescriptor)
+                .then(projectContent => {
+                    console.log(projectContent);
+                    return showMenu(projectContent)
+                        .then(() => {
+                            return Promise.resolve()
+                                .then(() => closeProjectFile(fileDescriptor))
+                        })
                 })
+
 
         })
 
