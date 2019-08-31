@@ -8,6 +8,11 @@ const emptyProject = {
     }
 };
 
+/**
+ *
+ * @param {string} projectFilePath
+ * @returns {Promise<undefined>}
+ */
 module.exports = function createProjectFile(projectFilePath) {
     return Promise.resolve()
         .then(() => {
