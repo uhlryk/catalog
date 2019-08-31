@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const listRawFiles = require("./listRawFiles");
+const listTaggedFiles = require("./listTaggedFiles");
 /**
  *
  * @param {object} projectContent
@@ -32,9 +33,12 @@ module.exports = function showMenu(projectContent, projectPath) {
                     })
 
             } else if(answers["menuOptions"] === "SHOW TAGGED FILES") {
-                return new Promise((resolve, reject) => {
-                    resolve();
-                })
+                return listTaggedFiles(projectContent, projectPath)
+                    .then(fileList  => {
+                        fileList.forEach(file => {
+                            console.log(file)
+                        })
+                    })
             } else if(answers["menuOptions"] === "EXIT") {
                 process.exit();
             }
